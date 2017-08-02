@@ -33,10 +33,11 @@ require('./example')
 /// / Turn Functionality /////
 /// //////////////////////////
 
-let turn = 4
+let turn = 0
 
 // Test for odd or even and display current marker
 const render = function () {
+  turn += 1
   if (isEven() === true) {
     console.log('X Turn')
     $('.item').click(currentX)
@@ -44,7 +45,6 @@ const render = function () {
     console.log('o Turn')
     $('.item').on('click', currentO)
   }
-  $('.row').on('click', nextTurn)
 }
 
 /// //////////////////////////
@@ -72,12 +72,7 @@ function currentO () {
   $(this).text('O')
 }
 
-// Tests for even
-function isEven () {
-  return turn % 2 === 0
-}
-
 // function isOdd(n) {
 //   return Math.abs(n % 2) === 1
 // }
-render()
+$('.item').on('click', render)
