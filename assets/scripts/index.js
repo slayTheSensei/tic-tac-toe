@@ -29,36 +29,55 @@ require('./example')
 // ]
 //
 
-let turn = 2
-// Chnages turn
-const nextTurn = function() {
+/// //////////////////////////
+/// / Turn Functionality /////
+/// //////////////////////////
+
+let turn = 4
+
+// Test for odd or even and display current marker
+const render = function () {
+  if (isEven() === true) {
+    console.log('X Turn')
+    $('.item').click(currentX)
+  } else {
+    console.log('o Turn')
+    $('.item').on('click', currentO)
+  }
+  $('.row').on('click', nextTurn)
+}
+
+/// //////////////////////////
+/// / Callbacks /////
+/// //////////////////////////
+
+// Changes turn
+const nextTurn = function () {
   turn += 1
   console.log(turn)
   return turn
 }
-
-// Test for odd or even and display current marker
-const render = function () {
-  if (turn === isEven(2)) {
-    $('.item').on('click', function () {
-      $(this).text('X')
-    })
-  } else {
-    $('.item').on('click', function () {
-      $(this).text('O')
-    })
-  }
+// Check for even turn
+function isEven () {
+  return turn % 2 === 0
 }
 
-/// //////////////////////////
-/// / ODD/EVEN FUNCTIONS /////
-/// //////////////////////////
-
-function isEven (n) {
-  return n % 2 === 0
+// Changes marker to O
+function currentX () {
+  $(this).text('X')
 }
 
-render()
+// Changes marker to X
+function currentO () {
+  $(this).text('O')
+}
+
+// Tests for even
+function isEven () {
+  return turn % 2 === 0
+}
+
 // function isOdd(n) {
 //   return Math.abs(n % 2) === 1
 // }
+render()
