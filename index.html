@@ -17,30 +17,46 @@
       <!-- Do not add `script` tags-->
       <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
-    </head>
-    <body>
+  </head>
+  <body>
+      <!-- <nav class="navbar navbar-default navbar-fixed-top"></nav> -->
+
+
       <div class="grid">
       	<div class="row">
-      		<div class="item-0 item" id="firstSquare"></div>
-      		<div class="item-1 item"></div>
-      		<div class="item-2 item"></div>
+      		<div class="item-0 item" id="0"></div>
+      		<div class="item-1 item" id="1"></div>
+      		<div class="item-2 item" id="2"></div>
         </div>
         <div class="row">
-      		<div class="item-3 item"></div>
-      		<div class="item-4 item"></div>
-      		<div class="item-5 item"></div>
+      		<div class="item-3 item" id="3"></div>
+      		<div class="item-4 item" id="4"></div>
+      		<div class="item-5 item" id="5"></div>
         </div>
         <div class="row">
-      		<div class="item-6 item"></div>
-      		<div class="item-7 item"></div>
-      		<div class="item-8 item"></div>
+      		<div class="item-6 item" id="6"></div>
+      		<div class="item-7 item" id="7"></div>
+      		<div class="item-8 item" id="8"></div>
         </div>
       </div>
       <footer>
         <div class="btm-nav">
-          <div class="x-turn" id="current-x">X</div>
+          <div class="my-turn" id="myTurnX">X</div>
             <button type="button" class="btn btn-secondary" id="reset">Reset</button>
-          <div class="o-turn" id="current-o">O</div>
+          <div class="my-turn" id="myTurnO">O</div>
+        </div>
+        <div class="Login">
+          <h2>Sign Up</h2>
+          <form>
+            <input name="credentials[email]" type="text" value="an@example.email">
+            <input name="credentials[password]" type="password" value="an example password">
+            <input name="credentials[password_confirmation]" type="password" value="an example password">
+          </form>
+          <h2>Sign In</h2>
+          <form>
+            <input name="credentials[email]" type="text" value="an@example.email">
+            <input name="credentials[password]" type="password" value="an example password">
+            </form>
         </div>
       </footer>
     </body>
