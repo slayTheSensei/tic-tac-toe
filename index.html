@@ -19,10 +19,26 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
   </head>
   <body>
-      <!-- <nav class="navbar navbar-default navbar-fixed-top"></nav> -->
+    <div class="header">
+      <div class="nav">Kyle's Tic Tac Toe</div>
+    </div>
+      <button id="btn-popup01" class="popup">popup button 1</button>
+      <!-- create a span with the button#IDvalue as class value-->
+      <span class="overlay_popup btn-popup01"><a href="#" onclick="$(this).popupClose();">close</a>
+      <h1>X Wins!</h1>
+        <p><a href="./index.html">Play Again?</a></p>
+      </span>
+
+      <!--create a button with unique ID* -->
+      <button id="btn-popup02" class="popup">popup button 2</button>
+      <!-- create a span with the button#IDvalue as class value-->
+      <span class="overlay_popup btn-popup02"><a href="#" onclick="$(this).popupClose();">close</a>
+      <h1>O Wins</h1>
+        <p>Play Again?</p>
+      </span>
 
 
-      <div class="grid">
+      <div class="flex-container">
       	<div class="row">
       		<div class="item-0 item" id="0"></div>
       		<div class="item-1 item" id="1"></div>
@@ -38,16 +54,16 @@
       		<div class="item-7 item" id="7"></div>
       		<div class="item-8 item" id="8"></div>
         </div>
-      </div>
-      <footer>
         <div class="btm-nav">
-          <div class="my-turn" id="myTurnX">X</div>
+          <div class="my-turn shade" id="myTurnX">X</div>
             <button type="button" class="btn btn-secondary" id="reset">Reset</button>
           <div class="my-turn" id="myTurnO">O</div>
         </div>
+      <footer>
+        </div>
         <div class="Login">
-          <h2>Sign Up</h2>
-          <form>
+          <!-- <h2>Sign Up</h2>
+          <!-- <form>
             <input name="credentials[email]" type="text" value="an@example.email">
             <input name="credentials[password]" type="password" value="an example password">
             <input name="credentials[password_confirmation]" type="password" value="an example password">
@@ -56,7 +72,7 @@
           <form>
             <input name="credentials[email]" type="text" value="an@example.email">
             <input name="credentials[password]" type="password" value="an example password">
-            </form>
+            </form> --> -->
         </div>
       </footer>
     </body>

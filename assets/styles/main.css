@@ -11,26 +11,46 @@ body {
 	font-family: 'Varela Round', sans-serif;
 	color: #fff;
 	background: #e8e9e9;
+	/*padding-left: 5%;
+	padding-right: 5%;*/
+}
 
+.header {
+  display: flex;
+  background: #83878c;
+}
+
+.nav {
+  display: flex;
+  margin: 0 auto;
+  font-size: 2em;
+  line-height: 50px;
+  font-family: 'Varela Round', sans-serif;
+  justify-content: center;
+  color: #fff;
+  height: 50px;
+  width: 100%;
 }
 
 .row {
 	padding: 10px;
 	background: #fff;
-	/*margin:  0 auto;*/
+	margin-left: 10px;
   box-shadow: 0 1.5px 0 0 rgba(0,0,0,0.1);
 }
 
 .item {
 	color: #fff;
-  height: 150px;
-  width: 150px;
-	padding: 15px;
+  height: 140px;
+  width: 140px;
+  line-height: 150px;
+  white-space: nowrap;
 	margin: 0 10px 0 10px;
   text-align: center;
 	background: #3db5da;
 	border-radius: 6px;
-  font-size: 3em;
+  font-size: 6em;
+
 }
 
 .x-turn {
@@ -53,6 +73,7 @@ body {
 	padding: 15px;
 	margin: 0 10px 0 10px;
   text-align: center;
+  font-family: 'Varela Round', sans-serif;
 	background: #83878c;
   text-decoration: none;
   font-size: 1em;
@@ -60,35 +81,14 @@ body {
   align-items: center;
 }
 
-/*.my-turn {
-	color: #fff;
-  height: 50px;
-  width: 20%;
-	padding: 15px;
-	margin: 0 10px 0 10px;
-  text-align: center;
-	background: #f45642;
-	border-radius: 6px;
-  font-size: 2em;
-  opacity: .4;
-}*/
-
-#myTurnX{
-	color: #fff;
-  height: 50px;
-  width: 20%;
-	padding: 15px;
-	margin: 0 10px 0 10px;
-  text-align: center;
-	background: #f45642;
-	border-radius: 6px;
-  font-size: 2em;
-
+.shade{
+  opacity: .4
 }
 
-#myTurnO{
+.my-turn{
 	color: #fff;
   height: 50px;
+  line-height: 25px;
   width: 20%;
 	padding: 15px;
 	margin: 0 10px 0 10px;
@@ -101,13 +101,11 @@ body {
 .btm-nav {
 	padding: 10px;
 	background: #fff;
-	margin:  20px auto;
+	margin:  10px auto;
   box-shadow: 0 1.5px 0 0 rgba(0,0,0,0.1);
 }
 
-h2 {
-  margin-top: 50px;
-}
+
 
 /* =================================
   Flexbox
@@ -124,7 +122,7 @@ h2 {
 .row {
 	display: flex;
 	flex-wrap: row-wrap;
-	justify-content: space-between;
+	justify-content: flex-end;
   margin: 0 auto;
   max-width: fit-content;
 }
@@ -136,10 +134,67 @@ h2 {
   max-width: 530px;
 }
 
-.item {
+.flex-container {
   display: flex;
+  flex-wrap: wrap;
+  max-width: 465px;
+  margin: 0 auto;
+
 }
 
 /* =================================
   hide/show
 ==================================== */
+
+button {
+  padding: 10px;
+  font-size: 1.5rem;
+  background-color: #d5d5d5;
+  border: 3px solid #ddd;
+  margin: 15px;
+  box-shadow: 0px 0px 15px #888888;
+  cursor: pointer;
+}
+
+button:hover {
+  box-shadow: 0px 0px 10px #888888;
+}
+
+body:after {
+    content: "";
+    display: none;
+    position: fixed; /* could also be absolute */
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+  background: rgba(250,250,250,0.9);
+}
+
+.overlay_popup {
+  display: none;
+  padding: 10px;
+    width: 300px;
+    height: 200px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -150px;
+    content: 'Play Again?'
+    /*background-color: #fff;*/
+    border-radius: 5px;
+    text-align: center;
+    z-index: 11; /* 1px higher than the overlay layer */
+}
+
+body.popup-open:after, .popup-open {
+  display: block;
+  overflow: hidden; /*prevents bg content from scrolling when popup shown*/
+
+}
+
+.popup {
+  visibility: hidden;
+}
