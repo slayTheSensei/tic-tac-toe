@@ -12,68 +12,94 @@
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" type="text/css" href="assets/styles/index.scss">
   <link rel="stylesheet" type="text/css" href="assets/styles/main.css">
-	<link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+  <!-- Do not add `script` tags-->
 
-      <!-- Do not add `script` tags-->
-      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
-      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
-  </head>
-  <body>
-    <div class="header">
-      <div class="nav">Kyle's Tic Tac Toe</div>
-    </div>
-      <button id="btn-popup01" class="popup">popup button 1</button>
-      <!-- create a span with the button#IDvalue as class value-->
-      <span class="overlay_popup btn-popup01"><a href="#" onclick="$(this).popupClose();">close</a>
+  <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+  <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+</head>
+
+<body>
+  <div class="header">
+    <div class="nav">Kyle's Tic Tac Toe</div>
+  </div>
+  <button id="btn-popup01" class="popup">popup button 1</button>
+  <span class="overlay_popup btn-popup01"><a href="#" onclick="$(this).popupClose();">close</a>
       <h1>X Wins!</h1>
         <p><a href="./index.html">Play Again?</a></p>
       </span>
-
-      <!--create a button with unique ID* -->
-      <button id="btn-popup02" class="popup">popup button 2</button>
-      <!-- create a span with the button#IDvalue as class value-->
-      <span class="overlay_popup btn-popup02"><a href="#" onclick="$(this).popupClose();">close</a>
+  <button id="btn-popup02" class="popup">popup button 2</button>
+  <span class="overlay_popup btn-popup02"><a href="#" onclick="$(this).popupClose();">close</a>
       <h1>O Wins</h1>
         <p>Play Again?</p>
       </span>
+  <button id="btn-popup03" class="popup">popup button 2</button>
+  <span class="overlay_popup btn-popup03"><a href="#" onclick="$(this).popupClose();">close</a>
+      <h1>Welcome to Tic Tac Toe</h1>
+        <p><a href="./index.html">Play Again?</a></p>
+      </span>
 
+  <form id="sign-up">
+    <fieldset>
+      <legend>Sign up!</legend>
+      <input type="text" name="credentials[email]" value="" placeholder="email">
+      <input type="password" name="credentials[password]" value="" placeholder="password">
+      <input type="password" name="credentials[password_confirmation]" value="" placeholder="password confirmation">
+      <input type="submit" name="submit" value="Sign up!">
+    </fieldset>
+  </form>
+  <form id="sign-in">
+    <fieldset>
+      <legend>Sign in!</legend>
+      <input type="text" name="credentials[email]" value="" placeholder="email">
+      <input type="password" name="credentials[password]" value="" placeholder="password">
+      <input type="submit" name="submit" value="Sign in!">
+    </fieldset>
+  </form>
+  <form id="sign-out">
+    <fieldset>
+      <legend>Sign out!</legend>
+      <input type="submit" name="submit" value="Sign out!">
+    </fieldset>
+  </form>
+  <form id="change-password">
+    <fieldset>
+      <legend>Change Password</legend>
+      <input type="password" name="passwords[old]" value="" placeholder="Old Password">
+      <input type="password" name="passwords[new]" value="" placeholder="New Password">
+      <input type="submit" name="submit" value="Change Password">
+    </fieldset>
+  </form>
 
-      <div class="flex-container">
-      	<div class="row">
-      		<div class="item-0 item" id="0"></div>
-      		<div class="item-1 item" id="1"></div>
-      		<div class="item-2 item" id="2"></div>
-        </div>
-        <div class="row">
-      		<div class="item-3 item" id="3"></div>
-      		<div class="item-4 item" id="4"></div>
-      		<div class="item-5 item" id="5"></div>
-        </div>
-        <div class="row">
-      		<div class="item-6 item" id="6"></div>
-      		<div class="item-7 item" id="7"></div>
-      		<div class="item-8 item" id="8"></div>
-        </div>
-        <div class="btm-nav">
-          <div class="my-turn shade" id="myTurnX">X</div>
-            <button type="button" class="btn btn-secondary" id="reset">Reset</button>
-          <div class="my-turn" id="myTurnO">O</div>
-        </div>
-      <footer>
-        </div>
-        <div class="Login">
-          <!-- <h2>Sign Up</h2>
-          <!-- <form>
-            <input name="credentials[email]" type="text" value="an@example.email">
-            <input name="credentials[password]" type="password" value="an example password">
-            <input name="credentials[password_confirmation]" type="password" value="an example password">
-          </form>
-          <h2>Sign In</h2>
-          <form>
-            <input name="credentials[email]" type="text" value="an@example.email">
-            <input name="credentials[password]" type="password" value="an example password">
-            </form> --> -->
-        </div>
-      </footer>
-    </body>
+  <div class="flex-container" id="grid">
+    <div class="row">
+      <div class="item-0 item" id="0"></div>
+      <div class="item-1 item" id="1"></div>
+      <div class="item-2 item" id="2"></div>
+    </div>
+    <div class="row">
+      <div class="item-3 item" id="3"></div>
+      <div class="item-4 item" id="4"></div>
+      <div class="item-5 item" id="5"></div>
+    </div>
+    <div class="row">
+      <div class="item-6 item" id="6"></div>
+      <div class="item-7 item" id="7"></div>
+      <div class="item-8 item" id="8"></div>
+    </div>
+    <div class="btm-nav">
+      <div class="my-turn shade" id="myTurnX">X</div>
+      <button type="button" class="btn btn-secondary" id="reset">Reset</button>
+      <div class="my-turn" id="myTurnO">O</div>
+    </div>
+  </div>
+  <div class="api">
+    <form>
+      <input name="game[cell][index]" type="text" value="0">
+      <input name="game[cell][value]" type="text" value="x">
+      <input name="game[over]" type="text" value="false">
+    </form>
+  </div>
+</body>
+
 </html>
