@@ -20,9 +20,71 @@ require('./example')
 let cells = []
 
 // callback functions being sent to api JSON data
-let id
-let cell
+let index
+let value
 let over
+
+/// //////////////////////////
+/// / SENDING MOVES //////////
+/// //////////////////////////
+
+// const sendMoves = function () {
+//   if (cell === 'box-1') {
+//     value = $('#box-1').html()
+//     index = 0
+//     over = over
+//     gameEvents.updateGame(index, value, over)
+//     // console.log(moves)
+//   } else if (cell === 'box-2') {
+//       value = ($('#box-2').html())
+//       index = 1
+//       over = over
+//       gameEvents.updateGame(index, value, over)
+//     //  console.log(moves)
+//   } else if (cell === 'box-3') {
+//     value = ($('#box-3').html())
+//     index = 2
+//     over = over
+//     gameEvents.updateGame(index, value, over)
+//     // console.log(moves)
+//   } else if (cell === 'box-4') {
+//     value = ($('#box-4').html())
+//     index = 3
+//     over = over
+//     gameEvents.updateGame(index, value, over)
+//   //  console.log(moves)
+//   } else if (cell === 'box-5') {
+//     value = ($('#box-5').html())
+//     index = 4
+//     over = over
+//     gameEvents.updateGame(index, value, over)
+//   //  console.log(moves)
+//   } else if (cell === 'box-6') {
+//     value = ($('#box-6').html())
+//     index = 5
+//     over = over
+//     gameEvents.updateGame(index, value, over)
+//   //  console.log(moves)
+//   } else if (cell === 'box-7') {
+//     value = ($('#box-7').html())
+//     index = 6
+//     over = over
+//     gameEvents.updateGame(index, value, over)
+//   //  console.log(moves)
+//   } else if (cell === 'box-8') {
+//     value = ($('#box-7').html())
+//     index = 7
+//     over = over
+//     gameEvents.updateGame(index, value, over)
+//   //  console.log(moves)
+//   } else if (cell === 'box-9') {
+//     value = ($('#box-9').html())
+//     index = 8
+//     over = over
+//     gameEvents.updateGame(index, value, over)
+//   //  console.log(moves)
+//   }
+// }
 
 /// //////////////////////////
 /// / TURN FUNCTIONALITY /////
@@ -34,19 +96,19 @@ let turn = 0
 const render = function () {
   if (isEven() === true) {
     nextTurn()
-    console.log('X Turn')
+    // console.log('X Turn')
     draw()
-    $('.item').click(currentX)
+    $('.item').on('click', currentX) // event.target instead of $('.item')
   } else {
     nextTurn()
-    console.log('O Turn')
+    // console.log('O Turn')
     draw()
     $('.item').on('click', currentO)
   }
   // squares.on('click', board)
   pushCells()
   whitespace()
-  console.log(cells)
+  // console.log(cells) // squares.text()
   $('#myTurnO').toggleClass('shade')
   $('#myTurnX').toggleClass('shade')
   checkForWin()
@@ -68,10 +130,10 @@ const pushCells = function () {
 const nextTurn = function () {
   turn += 1
   console.log(turn)
-  return turn
 }
 // Check for even turn
 function isEven () {
+  console.log(turn % 2 === 0)
   return turn % 2 === 0
 }
 
@@ -84,12 +146,25 @@ const resetBoard = function () {
 
 // Changes marker to X
 function currentX () {
-  $(this).text('x').off()
+  $(this).text('X').off()
+  index = (this.id)
+  value = $(this).text()
+  console.log(value + ' marker was clicked')
+  console.log(index + ' index was placed')
+  event.stopPropagation()
+
+  // api.updateGame(index,'x')
 }
 
 // Changes marker to O
-function currentO () {
-  $(this).text('o').off()
+function currentO (event) {
+  $(this).text('O').off()
+  index = (this.id)
+  value = $(this).text()
+  // api.updateGame(index,'o')
+  console.log(value + ' marker was clicked')
+  console.log(index + ' index was placed')
+  event.stopPropagation()
 }
 
 // Selects all elements with the class 'item'
@@ -207,9 +282,9 @@ const checkForWin = function () {
 // ///// FUNCTION CALLS ///////
 // ////////////////////////////
 
-render()
+// render()
 $('#reset').on('click', resetBoard)
-$('.item').on('click', render)
+$(document).ready(render)
 
 // //////////////////////////////////
 // ///// WIN SCREEN /////////////////
@@ -245,7 +320,6 @@ $(() => {
 })
 
 module.exports = {
-  game,
   cells,
   render
 }
