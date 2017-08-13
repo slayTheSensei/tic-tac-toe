@@ -46,6 +46,7 @@ const changePassword = function (data) {
 }
 
 const updateMoves = function (index, value, over) {
+  console.log(index + ' ' + value + ' ' + over)
   console.log(app.user.token)
   return $.ajax({
     url: app.host + '/games/' + app.game.id,
@@ -70,5 +71,6 @@ module.exports = {
   signUp,
   signIn,
   signOut,
-  changePassword
+  changePassword,
+  updateMoves
 }

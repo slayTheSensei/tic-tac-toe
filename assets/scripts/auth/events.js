@@ -38,9 +38,9 @@ const onChangePassword = function(event) {
 
 // event handler to update game states
 const updateGame = function (index, value, over) {
-  gameApi.updateMoves(index, value, over)
-    .then(gameUi.onUpdateSuccess)
-    .catch(gameUi.onUpdateFail)
+  api.updateMoves(index, value, over)
+    .then(ui.onUpdateSuccess)
+    .catch(ui.onUpdateFail)
 }
 
 const addHandlers = () => {
@@ -51,5 +51,6 @@ const addHandlers = () => {
 }
 
 module.exports = {
-  addHandlers
+  addHandlers,
+  updateGame
 }

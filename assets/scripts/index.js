@@ -3,7 +3,7 @@
 const setAPIOrigin = require('../../lib/set-api-origin')
 const config = require('./config')
 const api = require('./auth/api.js')
-const events = require('./auth/events.js')
+const gameEvents = require('./auth/events.js')
 
 $(() => {
   setAPIOrigin(location, config)
@@ -20,9 +20,8 @@ require('./example')
 /// //////////////////////////
 
 let cells = []
-let turn = 0
 let win = false
-
+let turn = 0
 // callback functions being sent to api JSON data
 let index
 let value
@@ -45,8 +44,8 @@ const render = function () {
   }
   $('#myTurnO').toggleClass('shade')
   $('#myTurnX').toggleClass('shade')
+  turn += 1
   checkForWin()
-  return turn
 }
 
 // ////////////////////////////////
@@ -83,15 +82,16 @@ const resetBoard = function () {
 
 // Changes marker to X
 function currentX () {
-  console.log(turn)
+  // console.log(turn)
   $(this).text('X').off()
   index = (this.id)
   value = $(this).text()
+  checkForWin()
   over = win
-  console.log(index + value + over)
-  // api.updateGame(index, value, over)
-  console.log(value + ' marker was clicked')
-  console.log(index + ' index was placed')
+  gameEvents.updateGame(index, value, over)
+  // console.log(index + value + over)
+  // console.log(value + ' marker was clicked')
+  // console.log(index + ' index was placed')
 
   // api.updateGame(index,'x')
 }
@@ -101,7 +101,10 @@ function currentO () {
   $(this).text('O').off()
   index = (this.id)
   value = $(this).text()
+  checkForWin()
   over = win
+  console.log(over)
+  // gameEvents.updateGame(index, value, over)
   // api.updateGame(index, value, over)
   console.log(index + value + over)
   // api.updateGame(index,'o')
@@ -133,51 +136,61 @@ const checkForWin = function () {
     console.log('X Wins!')
     $('#btn-popup01').click()
     $('.item').off()
+    win = true
 
   } else if ($('#0').text() === ('O') && $('#1').text() === ('O') && $('#2').text() === 'O') {
     console.log('O Wins!')
     $("#btn-popup02").click();
     $('.item').off()
+    win = true
 
   } else if ($('#3').text() === ('X') && $('#4').text() === ('X') && $('#5').text() === 'X') {
     console.log('X Wins!')
     $("#btn-popup01").click();
     $('.item').off()
+    win = true
 
   } else if ($('#3').text() === ('O') && $('#4').text() === ('O') && $('#5').text() === 'O') {
     console.log('O Wins!')
     $("#btn-popup02").click();
     $('.item').off()
+    win = true
 
   } else if ($('#6').text() === ('X') && $('#7').text() === ('X') && $('#8').text() === 'X') {
     console.log('X Wins!')
     $("#btn-popup01").click();
     $('.item').off()
+    win = true
 
   } else if ($('#6').text() === ('O') && $('#7').text() === ('O') && $('#8').text() === 'O') {
     console.log('O Wins!')
     $("#btn-popup02").click();
     $('.item').off()
+    win = true
 
   } else if ($('#0').text() === ('X') && $('#3').text() === ('X') && $('#6').text() === 'X') {
     console.log('X Wins!')
     $("#btn-popup01").click();
     $('.item').off()
+    win = true
 
   } else if ($('#0').text() === ('O') && $('#3').text() === ('O') && $('#6').text() === 'O') {
     console.log('O Wins!')
     $("#btn-popup02").click();
     $('.item').off()
+    win = true
 
   } else if ($('#1').text() === ('X') && $('#4').text() === ('X') && $('#7').text() === 'X') {
     console.log('X Wins!')
     $("#btn-popup01").click();
     $('.item').off()
+    win = true
 
   } else if ($('#1').text() === ('O') && $('#4').text() === ('O') && $('#7').text() === 'O') {
     console.log('O Wins!')
     $("#btn-popup02").click();
     $('.item').off()
+    win = true
 
   } else if ($('#2').text() === ('X') && $('#5').text() === ('X') && $('#8').text() === 'X') {
     console.log('X Wins!')
@@ -188,28 +201,33 @@ const checkForWin = function () {
     console.log('O Wins!')
     $("#btn-popup02").click();
     $('.item').off()
+    win = true
 
   } else if ($('#0').text() === ('X') && $('#4').text() === ('X') && $('#8').text() === 'X') {
     console.log('X Wins!')
     $("#btn-popup01").click();
     $('.item').off()
+    win = true
 
   } else if ($('#0').text() === ('O') && $('#4').text() === ('O') && $('#8').text() === 'O') {
 
     console.log('O Wins!')
     $("#btn-popup02").click();
     $('.item').off()
+    win = true
 
 // TODO Fix whatever is broken
   } else if ($('#2').text() === ('X') && $('#4').text() === ('X') && $('#6').text() === 'X') {
     console.log('X Wins!')
     $("#btn-popup01").click()
     $('.item').off()
+    win = true
 
   } else if ($('#2').text() === ('O') && $('#4').text() === ('O') && $('#6').text() === 'O') {
     console.log('O Wins!')
     $("#btn-popup02").click()
     $('.item').off()
+    win = true
   }
 }
 
@@ -253,6 +271,7 @@ $(() => {
 })
 
 module.exports = {
-  cells,
-  render
+  render,
+  currentX,
+  currentO
 }
