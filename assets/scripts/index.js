@@ -84,7 +84,7 @@ const resetBoard = function () {
 function currentX () {
   // console.log(turn)
   $(this).text('X').off()
-  index = (this.id)
+  index = (0)
   value = $(this).text()
   checkForWin()
   over = win
@@ -236,6 +236,7 @@ const checkForWin = function () {
 // ////////////////////////////
 
 $(document).ready(render)
+// api.getGame()
 // $('.item').click(render)
 // //////////////////////////////////
 // ///// WIN SCREEN /////////////////

@@ -45,6 +45,26 @@ const changePassword = function (data) {
   })
 }
 
+// api call for starting a new game
+const createGame = function () {
+  // console.log ("Hello")
+  console.log(app.user.token)
+  return $.ajax({
+    url: app.host + '/games',
+    headers: {
+      Authorization: 'Token token=' + app.user.token
+    },
+    method: 'POST',
+    success: function (response) {
+      console.log(response)
+    }
+    // ail: function (error) {
+    // console.log(error)
+    // console.log("Please Log in")
+    // }
+  })
+}
+
 const updateMoves = function (index, value, over) {
   console.log(index + ' ' + value + ' ' + over)
   console.log(app.user.token)
@@ -68,6 +88,7 @@ const updateMoves = function (index, value, over) {
 }
 
 module.exports = {
+  createGame,
   signUp,
   signIn,
   signOut,

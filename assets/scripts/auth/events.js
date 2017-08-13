@@ -36,6 +36,13 @@ const onChangePassword = function(event) {
     .fail(ui.fail)
 }
 
+const onCreateGame = function (event) {
+  event.preventDefault()
+  api.createGame()
+    .then(ui.gamePostSuccess)
+    .catch(ui.fail)
+}
+
 // event handler to update game states
 const updateGame = function (index, value, over) {
   api.updateMoves(index, value, over)
@@ -48,6 +55,7 @@ const addHandlers = () => {
   $('#sign-in').on('submit', onSignIn)
   $('#sign-out').on('submit', onSignOut)
   $('#change-password').on('submit', onChangePassword)
+  $('#newGame').on('click', onCreateGame)
 }
 
 module.exports = {
