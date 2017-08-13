@@ -50,12 +50,21 @@ const updateGame = function (index, value, over) {
     .catch(ui.onUpdateFail)
 }
 
+const onGetGames = function (event) {
+  event.preventDefault()
+  // console.log('here')
+  api.retrieveGames()
+    .then(ui.getGameSuccess)
+    .catch(ui.fail)
+}
+
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
   $('#sign-out').on('submit', onSignOut)
   $('#change-password').on('submit', onChangePassword)
   $('#newGame').on('click', onCreateGame)
+  $('#get-games').on('click', onGetGames)
 }
 
 module.exports = {

@@ -87,11 +87,22 @@ const updateMoves = function (index, value, over) {
   })
 }
 
+const retrieveGames = function () {
+  return $.ajax({
+    method: 'GET',
+    url: app.host + '/games?over=true',
+    headers: {
+      Authorization: 'Token token=' + app.user.token
+    }
+  })
+}
+
 module.exports = {
   createGame,
   signUp,
   signIn,
   signOut,
   changePassword,
-  updateMoves
+  updateMoves,
+  retrieveGames
 }
