@@ -2,6 +2,8 @@
 
 const setAPIOrigin = require('../../lib/set-api-origin')
 const config = require('./config')
+const api = require('./auth/api.js')
+const events = require('./auth/events.js')
 
 $(() => {
   setAPIOrigin(location, config)
@@ -14,10 +16,12 @@ $(() => {
 require('./example')
 
 /// //////////////////////////
-/// / ARRAYS /////////////
+/// / VARIABLES /////////////
 /// //////////////////////////
 
 let cells = []
+let turn = 0
+let win = false
 
 // callback functions being sent to api JSON data
 let index
@@ -25,94 +29,24 @@ let value
 let over
 
 /// //////////////////////////
-/// / SENDING MOVES //////////
-/// //////////////////////////
-
-// const sendMoves = function () {
-//   if (cell === 'box-1') {
-//     value = $('#box-1').html()
-//     index = 0
-//     over = over
-//     gameEvents.updateGame(index, value, over)
-//     // console.log(moves)
-//   } else if (cell === 'box-2') {
-//       value = ($('#box-2').html())
-//       index = 1
-//       over = over
-//       gameEvents.updateGame(index, value, over)
-//     //  console.log(moves)
-//   } else if (cell === 'box-3') {
-//     value = ($('#box-3').html())
-//     index = 2
-//     over = over
-//     gameEvents.updateGame(index, value, over)
-//     // console.log(moves)
-//   } else if (cell === 'box-4') {
-//     value = ($('#box-4').html())
-//     index = 3
-//     over = over
-//     gameEvents.updateGame(index, value, over)
-//   //  console.log(moves)
-//   } else if (cell === 'box-5') {
-//     value = ($('#box-5').html())
-//     index = 4
-//     over = over
-//     gameEvents.updateGame(index, value, over)
-//   //  console.log(moves)
-//   } else if (cell === 'box-6') {
-//     value = ($('#box-6').html())
-//     index = 5
-//     over = over
-//     gameEvents.updateGame(index, value, over)
-//   //  console.log(moves)
-//   } else if (cell === 'box-7') {
-//     value = ($('#box-7').html())
-//     index = 6
-//     over = over
-//     gameEvents.updateGame(index, value, over)
-//   //  console.log(moves)
-//   } else if (cell === 'box-8') {
-//     value = ($('#box-7').html())
-//     index = 7
-//     over = over
-//     gameEvents.updateGame(index, value, over)
-//   //  console.log(moves)
-//   } else if (cell === 'box-9') {
-//     value = ($('#box-9').html())
-//     index = 8
-//     over = over
-//     gameEvents.updateGame(index, value, over)
-//   //  console.log(moves)
-//   }
-// }
-
-/// //////////////////////////
 /// / TURN FUNCTIONALITY /////
 /// //////////////////////////
 
-let turn = 0
+// $('.item').on('click', nextTurn)
 
-// Test for odd or even and display current marker
 const render = function () {
-  if (isEven() === true) {
-    nextTurn()
-    // console.log('X Turn')
+  console.log(turn)
+  if (turn % 2 === 0) {
     draw()
     $('.item').on('click', currentX) // event.target instead of $('.item')
   } else {
-    nextTurn()
-    // console.log('O Turn')
     draw()
     $('.item').on('click', currentO)
   }
-  // squares.on('click', board)
-  pushCells()
-  whitespace()
-  // console.log(cells) // squares.text()
   $('#myTurnO').toggleClass('shade')
   $('#myTurnX').toggleClass('shade')
   checkForWin()
-  // TODO add a callback function to notify player of turn change
+  return turn
 }
 
 // ////////////////////////////////
@@ -129,7 +63,9 @@ const pushCells = function () {
 // Changes turn
 const nextTurn = function () {
   turn += 1
-  console.log(turn)
+  // console.log(turn)
+  render()
+  return turn
 }
 // Check for even turn
 function isEven () {
@@ -141,30 +77,36 @@ const resetBoard = function () {
   $('.item').empty()
   turn = 0
   render()
+  $('.item').on()
   return turn
 }
 
 // Changes marker to X
 function currentX () {
+  console.log(turn)
   $(this).text('X').off()
   index = (this.id)
   value = $(this).text()
+  over = win
+  console.log(index + value + over)
+  // api.updateGame(index, value, over)
   console.log(value + ' marker was clicked')
   console.log(index + ' index was placed')
-  event.stopPropagation()
 
   // api.updateGame(index,'x')
 }
 
 // Changes marker to O
-function currentO (event) {
+function currentO () {
   $(this).text('O').off()
   index = (this.id)
   value = $(this).text()
+  over = win
+  // api.updateGame(index, value, over)
+  console.log(index + value + over)
   // api.updateGame(index,'o')
   console.log(value + ' marker was clicked')
   console.log(index + ' index was placed')
-  event.stopPropagation()
 }
 
 // Selects all elements with the class 'item'
@@ -172,19 +114,14 @@ function currentO (event) {
 const draw = function () {
   if (turn > 9) {
     console.log('Draw!')
-    return $('.item').off
+    return $('.item').off()
   }
 }
 
-const whitespace = function () {
-  for (let i = 0; i < cells.length; i++) {
-    cells[i].replace(/ /g, '')
-  }
-}
-
-// function board () {
-//   grid.push
-//   console.log(grid)
+// const whitespace = function () {
+//   for (let i = 0; i < cells.length; i++) {
+//     cells[i].replace(/ /g, '')
+//   }
 // }
 
 // ///////////////////////
@@ -276,16 +213,12 @@ const checkForWin = function () {
   }
 }
 
-// push the entire board values
-
 // ////////////////////////////
 // ///// FUNCTION CALLS ///////
 // ////////////////////////////
 
-// render()
-$('#reset').on('click', resetBoard)
 $(document).ready(render)
-
+// $('.item').click(render)
 // //////////////////////////////////
 // ///// WIN SCREEN /////////////////
 // //////////////////////////////////

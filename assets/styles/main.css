@@ -53,6 +53,10 @@ body {
 
 }
 
+.login {
+  visibility: hidden;
+}
+
 .x-turn {
 	color: #fff;
   height: 50px;

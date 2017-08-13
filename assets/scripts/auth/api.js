@@ -45,6 +45,27 @@ const changePassword = function (data) {
   })
 }
 
+const updateMoves = function (index, value, over) {
+  console.log(app.user.token)
+  return $.ajax({
+    url: app.host + '/games/' + app.game.id,
+    method: 'PATCH',
+    // dataType: 'jsonp',
+    headers: {
+      Authorization: 'Token token=' + app.user.token
+    },
+    data: {
+      'game': {
+        'cell': {
+          'index': index,
+          'value': value
+        },
+        'over': over
+      }
+    }
+  })
+}
+
 module.exports = {
   signUp,
   signIn,

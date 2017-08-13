@@ -4,7 +4,7 @@ const api = require('./api')
 const ui = require('./ui')
 const getFormFields = require('../../../lib/get-form-fields.js')
 
-const onSignUp = function (event) {
+const onSignUp = function(event) {
   event.preventDefault()
   let data = getFormFields(event.target) // This is targeting the data i want to send
   api.signUp(data)
@@ -12,7 +12,7 @@ const onSignUp = function (event) {
     .fail(ui.fail)
 }
 
-const onSignIn = function (event) {
+const onSignIn = function(event) {
   event.preventDefault()
   let data = getFormFields(event.target)
   api.signIn(data)
@@ -20,7 +20,7 @@ const onSignIn = function (event) {
     .fail(ui.fail)
 }
 
-const onSignOut = function (event) {
+const onSignOut = function(event) {
   event.preventDefault()
   let data = getFormFields(event.target)
   api.signOut(data)
@@ -28,12 +28,19 @@ const onSignOut = function (event) {
     .fail(ui.fail)
 }
 
-const onChangePassword = function (event) {
+const onChangePassword = function(event) {
   event.preventDefault()
   let data = getFormFields(event.target)
   api.changePassword(data)
     .done(ui.changePasswordSuccess)
     .fail(ui.fail)
+}
+
+// event handler to update game states
+const updateGame = function (index, value, over) {
+  gameApi.updateMoves(index, value, over)
+    .then(gameUi.onUpdateSuccess)
+    .catch(gameUi.onUpdateFail)
 }
 
 const addHandlers = () => {
