@@ -200,7 +200,7 @@ body:after {
     left: 50%;
     margin-top: -100px;
     margin-left: -150px;
-    content: 'Play Again?'
+    content: 'Play Again?';
     /*background-color: #fff;*/
     border-radius: 5px;
     text-align: center;
