@@ -3,6 +3,7 @@
 const api = require('./api')
 const ui = require('./ui')
 const getFormFields = require('../../../lib/get-form-fields.js')
+const game = require('../index.js')
 
 const onSignUp = function(event) {
   event.preventDefault()
@@ -58,6 +59,12 @@ const onGetGames = function (event) {
     .catch(ui.fail)
 }
 
+const resetGame = function () {
+  api.createGame()
+  .then(ui.onResetGameSuccess)
+  .catch(ui.onResetGameFail)
+}
+
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
@@ -69,5 +76,6 @@ const addHandlers = () => {
 
 module.exports = {
   addHandlers,
-  updateGame
+  updateGame,
+  resetGame
 }

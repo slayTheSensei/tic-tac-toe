@@ -1,9 +1,12 @@
 'use strict'
 // remove signIn and signOut
 const app = require('../app.js')
+const gameBoard = require('../index.js')
 // remove me before code-along
 const signInSuccess = (data) => {
   app.user = data.user
+  $('#sign-in').hide()
+  $('#sign-up').hide()
   console.log('signed in!')
   console.log(app)
 }
@@ -11,11 +14,13 @@ const signInSuccess = (data) => {
 // remove me before code-along
 const signOutSuccess = () => {
   app.user = null
+  $('#sign-in').show()
+  $('#sign-up').show()
   console.log(app)
 }
 
 const gamePostSuccess = (data) => {
-  // $('.game-board').show()
+  $('#grid').show()
   app.game = data.game
   app.game.id = data.game.id
 }
@@ -36,10 +41,16 @@ const failure = (error) => {
   console.error(error)
 }
 
+const onResetGameSuccess = function (data) {
+  // app.game = data.game
+  // app.game.id = data.game.id
+  console.log("Game Created!")
+}
+
 const getGameSuccess = function (data) {
   // app.game.id = data.game.id
   // app.game.over = data.game.over
-  console.log(data)
+  $('#games-played').text(data.games.length)
   // // assign variable to game data array
   // let games = data.games
   // // hide view button and change password form

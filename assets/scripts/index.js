@@ -37,10 +37,10 @@ const render = function () {
   console.log(turn)
   if (turn % 2 === 0) {
     draw()
-    $('.item').on('click', currentX) // event.target instead of $('.item')
+    $('.item').one('click', currentX) // event.target instead of $('.item')
   } else {
     draw()
-    $('.item').on('click', currentO)
+    $('.item').one('click', currentO)
   }
   $('#myTurnO').toggleClass('shade')
   $('#myTurnX').toggleClass('shade')
@@ -73,43 +73,37 @@ function isEven () {
 }
 
 const resetBoard = function () {
-  $('.item').empty()
+  gameEvents.resetGame()
+  squares.empty()
+  $('.item').removeClass('clicked')
   turn = 0
-  render()
-  $('.item').on()
+  console.log(turn)
   return turn
 }
 
 // Changes marker to X
-function currentX () {
+function currentX (event) {
   // console.log(turn)
-  $(this).text('X').off()
-  index = (0)
-  value = $(this).text()
-  checkForWin()
-  over = win
-  gameEvents.updateGame(index, value, over)
-  // console.log(index + value + over)
-  // console.log(value + ' marker was clicked')
-  // console.log(index + ' index was placed')
-
-  // api.updateGame(index,'x')
-}
-
-// Changes marker to O
-function currentO () {
-  $(this).text('O').off()
+  $(this).text('X')
+  $(this).addClass('clicked')
   index = (this.id)
   value = $(this).text()
   checkForWin()
   over = win
-  console.log(over)
-  // gameEvents.updateGame(index, value, over)
-  // api.updateGame(index, value, over)
-  console.log(index + value + over)
-  // api.updateGame(index,'o')
-  console.log(value + ' marker was clicked')
-  console.log(index + ' index was placed')
+  gameEvents.updateGame(index, value, over)
+  event.stopPropagation()
+}
+
+// Changes marker to O
+function currentO (event) {
+  $(this).text('O')
+  $(this).addClass('clicked')
+  index = (this.id)
+  value = $(this).text()
+  checkForWin()
+  over = win
+  gameEvents.updateGame(index, value, over)
+  event.stopPropagation()
 }
 
 // Selects all elements with the class 'item'
@@ -117,7 +111,7 @@ function currentO () {
 const draw = function () {
   if (turn > 9) {
     console.log('Draw!')
-    return $('.item').off()
+    return $('.item').addClass('clicked')
   }
 }
 
@@ -135,98 +129,98 @@ const checkForWin = function () {
   if ($('#0').text() === ('X') && $('#1').text() === ('X') && $('#2').text() === 'X') {
     console.log('X Wins!')
     $('#btn-popup01').click()
-    $('.item').off()
+    $('.item').addClass('clicked')
     win = true
 
   } else if ($('#0').text() === ('O') && $('#1').text() === ('O') && $('#2').text() === 'O') {
     console.log('O Wins!')
     $("#btn-popup02").click();
-    $('.item').off()
+    $('.item').addClass('clicked')
     win = true
 
   } else if ($('#3').text() === ('X') && $('#4').text() === ('X') && $('#5').text() === 'X') {
     console.log('X Wins!')
     $("#btn-popup01").click();
-    $('.item').off()
+    $('.item').addClass('clicked')
     win = true
 
   } else if ($('#3').text() === ('O') && $('#4').text() === ('O') && $('#5').text() === 'O') {
     console.log('O Wins!')
     $("#btn-popup02").click();
-    $('.item').off()
+    $('.item').addClass('clicked')
     win = true
 
   } else if ($('#6').text() === ('X') && $('#7').text() === ('X') && $('#8').text() === 'X') {
     console.log('X Wins!')
     $("#btn-popup01").click();
-    $('.item').off()
+    $('.item').addClass('clicked')
     win = true
 
   } else if ($('#6').text() === ('O') && $('#7').text() === ('O') && $('#8').text() === 'O') {
     console.log('O Wins!')
     $("#btn-popup02").click();
-    $('.item').off()
+    $('.item').addClass('clicked')
     win = true
 
   } else if ($('#0').text() === ('X') && $('#3').text() === ('X') && $('#6').text() === 'X') {
     console.log('X Wins!')
     $("#btn-popup01").click();
-    $('.item').off()
+    $('.item').addClass('clicked')
     win = true
 
   } else if ($('#0').text() === ('O') && $('#3').text() === ('O') && $('#6').text() === 'O') {
     console.log('O Wins!')
     $("#btn-popup02").click();
-    $('.item').off()
+    $('.item').addClass('clicked')
     win = true
 
   } else if ($('#1').text() === ('X') && $('#4').text() === ('X') && $('#7').text() === 'X') {
     console.log('X Wins!')
     $("#btn-popup01").click();
-    $('.item').off()
+    $('.item').addClass('clicked')
     win = true
 
   } else if ($('#1').text() === ('O') && $('#4').text() === ('O') && $('#7').text() === 'O') {
     console.log('O Wins!')
     $("#btn-popup02").click();
-    $('.item').off()
+    $('.item').addClass('clicked')
     win = true
 
   } else if ($('#2').text() === ('X') && $('#5').text() === ('X') && $('#8').text() === 'X') {
     console.log('X Wins!')
     $("#btn-popup01").click();
-    $('.item').off()
+    $('.item').addClass('clicked')
 
   } else if ($('#2').text() === ('O') && $('#5').text() === ('O') && $('#8').text() === 'O') {
     console.log('O Wins!')
     $("#btn-popup02").click();
-    $('.item').off()
+    $('.item').addClass('clicked')
     win = true
 
   } else if ($('#0').text() === ('X') && $('#4').text() === ('X') && $('#8').text() === 'X') {
     console.log('X Wins!')
     $("#btn-popup01").click();
-    $('.item').off()
+    $('.item').addClass('clicked')
     win = true
 
   } else if ($('#0').text() === ('O') && $('#4').text() === ('O') && $('#8').text() === 'O') {
 
     console.log('O Wins!')
     $("#btn-popup02").click();
-    $('.item').off()
+    $('.item').addClass('clicked')
     win = true
 
 // TODO Fix whatever is broken
   } else if ($('#2').text() === ('X') && $('#4').text() === ('X') && $('#6').text() === 'X') {
     console.log('X Wins!')
     $("#btn-popup01").click()
-    $('.item').off()
+    $('.item').addClass('clicked')
     win = true
 
   } else if ($('#2').text() === ('O') && $('#4').text() === ('O') && $('#6').text() === 'O') {
     console.log('O Wins!')
     $("#btn-popup02").click()
-    $('.item').off()
+    $('.item').addClass('clicked')
     win = true
   }
 }
@@ -235,7 +229,9 @@ const checkForWin = function () {
 // ///// FUNCTION CALLS ///////
 // ////////////////////////////
 
-$(document).ready(render)
+// $(document).ready(render)
+
+
 // api.getGame()
 // $('.item').click(render)
 // //////////////////////////////////
@@ -269,10 +265,19 @@ const authEvents = require('./auth/events.js')
 // On document ready
 $(() => {
   authEvents.addHandlers()
+  render()
+  $('#reset').on('click', resetBoard)
+  $('.item').on('click', render)
+  $('#grid').hide()
+  $('.replay').on('click', function () {
+    resetBoard()
+    $.fn.popupClose()
+  })
 })
 
 module.exports = {
   render,
   currentX,
-  currentO
+  currentO,
+  resetBoard
 }
