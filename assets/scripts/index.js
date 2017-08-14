@@ -81,7 +81,7 @@ const resetBoard = function () {
   return turn
 }
 
-// Changes marker to X
+// Changes marker to X and sends data to api
 function currentX (event) {
   // console.log(turn)
   $(this).text('X')
@@ -94,7 +94,7 @@ function currentX (event) {
   event.stopPropagation()
 }
 
-// Changes marker to O
+// Changes marker to O and sends data to api
 function currentO (event) {
   $(this).text('O')
   $(this).addClass('clicked')
